@@ -23,7 +23,10 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       // });
       //
       // ここに上記のどちらかのコードを記述してください。
-
+      var element = document.getElementById('firebrick');
+      element.addEventListener('click', function() {
+        element.textContent = Number(element.textContent) + 1;
+      });
 
       var firebrick = document.getElementById('firebrick');
       firebrick.dispatchEvent(createClickEvent());
@@ -37,7 +40,10 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
     it('2 番の要素の click イベントで要素内の数字を 1 ずつ小さくできる', function() {
 
       // ここにコードを記述してください。
-
+      var element = document.getElementById('chocolate');
+      element.addEventListener('click',function() {
+        element.textContent = Number(element.textContent) - 1;
+      });
 
       var chocolate = document.getElementById('chocolate');
       chocolate.dispatchEvent(createClickEvent());
@@ -51,7 +57,12 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
     it('3 番の要素の click イベントで要素を 10 度ずつ回転できる', function() {
 
       // ここにコードを記述してください。
-
+      var element = document.getElementsByClassName('mediumseagreen')[0];
+      var angle = 0;
+      element.addEventListener('click', function() {
+        angle += 10;
+        element.style.transform = 'rotate(' + angle + 'deg)';
+      });
 
       var mediumseagreen = document.querySelector('.mediumseagreen');
       mediumseagreen.dispatchEvent(createClickEvent());
@@ -67,7 +78,13 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
     it('4 番の要素を入力された角度に回転できる', function() {
 
       // ここにコードを記述してください。
+      var element = document.getElementsByClassName('turquoise')[0];
+      var input = element.getElementsByTagName('input')[0];
 
+      input.addEventListener('change', function() {
+        var angle = input.value;
+        element.style.transform = 'rotate(' + angle + 'deg)';
+      });
 
       var turquoise = document.querySelector('.turquoise');
       var turquoiseInput = turquoise.querySelector('input');
@@ -93,9 +110,11 @@ describe('ステージ4（意図通りにイベントを利用できる）', fun
       // なお、expect(steelblue).to.be.null は上記のテストの要件を満たして
       // いないので、正解ではありません。
 
-      var steelblue = document.querySelector('.steelblue');
-      expect(steelblue).to.have.property('textContent', '5 \uD83D\uDC33');
-      done();
+      document.addEventListener('DOMContentLoaded', function(){
+        var steelblue = document.querySelector('.steelblue');
+        expect(steelblue).to.have.property('textContent', '5 \uD83D\uDC33');
+        done();
+      });
     });
   });
 });
