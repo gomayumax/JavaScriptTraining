@@ -190,10 +190,11 @@ describe('ステージ5（意図通りに非同期処理を利用できる）', 
 
     it('Github API を使って、VimL、Emacs Lisp でスターが最も多いプロダクト名を' +
        'それぞれ 1 つずつ取得できる', function() {
-      var languages = [ 'VimL', '"Emacs Lisp"' ];
+      var languages = [ 'Vim', '"Emacs Lisp"' ];
 
       function serchRepositriesStarUser(lang){
         var queryString = 'q=languages:' + lang + '&sort=stars';
+        console.log(queryString);
 
         return fetch('https://api.github.com/search/repositories?' + queryString)
         .then(function(res) {
